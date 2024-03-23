@@ -22,4 +22,17 @@ public class BeanDependencyInjectionTest {
         Assertions.assertSame(fooBar.getBar(), bar);
         Assertions.assertSame(fooBar.getFoo(), foo);
     }
+
+    @Test
+    void testBeanDIWithSelectBean() {
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(BeanDependencyInjection.class);
+
+        FooBar fooBar = applicationContext.getBean(FooBar.class);
+        Foo foo = applicationContext.getBean("fooSecond",Foo.class);
+        Bar bar = applicationContext.getBean(Bar.class);
+
+        Assertions.assertSame(fooBar.getBar(), bar);
+        Assertions.assertSame(fooBar.getFoo(), foo);
+    }
 }

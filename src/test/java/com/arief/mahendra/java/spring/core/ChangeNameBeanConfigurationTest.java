@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class ChangeNameBeanConfigurationTest {
 
     @Test
-    void testPrimaryBeanConfiguration() {
+    void testChangeNameBeanConfiguration() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ChangeNameBeanConfiguration.class);
         Foo foo = applicationContext.getBean(Foo.class);
         Foo foo1 = applicationContext.getBean("fooFirst", Foo.class);
