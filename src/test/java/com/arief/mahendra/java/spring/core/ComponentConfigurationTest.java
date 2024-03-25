@@ -1,6 +1,10 @@
 package com.arief.mahendra.java.spring.core;
 
+import com.arief.mahendra.java.spring.core.repository.CategoryRepository;
+import com.arief.mahendra.java.spring.core.repository.CustomerRepository;
 import com.arief.mahendra.java.spring.core.repository.ProductRepository;
+import com.arief.mahendra.java.spring.core.service.CategoryService;
+import com.arief.mahendra.java.spring.core.service.CustomerService;
 import com.arief.mahendra.java.spring.core.service.ProductService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,5 +35,25 @@ public class ComponentConfigurationTest {
 
         ProductService productService = applicationContext.getBean(ProductService.class);
         Assertions.assertSame(productRepository, productService.getProductRepository());
+    }
+
+    @Test
+    void testSetterDI() {
+        CategoryService categoryService = applicationContext.getBean(CategoryService.class);
+        CategoryRepository categoryRepository = applicationContext.getBean(CategoryRepository.class);
+
+        Assertions.assertSame(categoryRepository, categoryService.getCategoryRepository());
+    }
+
+    @Test
+    void testFieldInjection() {
+        CustomerRepository customerRepository1 = applicationContext.getBean("normalCustomerRepository", CustomerRepository.class);
+
+        CustomerRepository customerRepository2 = applicationContext.getBean("premiumCustomerRepository", CustomerRepository.class);
+
+        CustomerService customerService = applicationContext.getBean(CustomerService.class);
+
+        Assertions.assertSame(customerRepository1, customerService.getNormalCustomerRepository());
+        Assertions.assertSame(customerRepository2, customerService.getPremiumCustomerRepository());
     }
 }
