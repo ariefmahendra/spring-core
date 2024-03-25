@@ -56,4 +56,5 @@ public class ComponentConfigurationTest {
         Assertions.assertSame(customerRepository1, customerService.getNormalCustomerRepository());
         Assertions.assertSame(customerRepository2, customerService.getPremiumCustomerRepository());
     }
+
 }
